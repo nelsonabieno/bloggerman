@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
+  protect_from_forgery with: :null_session, if: Proc.new {|c| c.request.format.json? }
   before_action :set_user, only: [:show, :new, :edit, :update, :destroy]
 
   def index
     @users = User.all
-    response_block @users
+    response_handler @users
   end
 
   def show
     @user
+    response_handler @user
   end
 
   def new
@@ -18,9 +20,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      response_block @user
+      response_handler @user
     else
-      response_block @user.errors.full_messages if @user.errors.any?
+      response_handler @user.errors.full_messages if @user.errors.any?
     end
   end
 
@@ -30,28 +32,28 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      response_block @user
+      response_handler @user
     else
-      response_block @user.errors.full_messages if @user.errors.any?
+      response_handler @user.errors.full_messages if @user.errors.any?
     end
   end
 
   def destroy
     if @user.destroy
-      response_block @user
+      response_handler @user
     end
   end
 
   private
   def set_user
-    @user = User.find params[:id]
+    @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:nick_name, :password, :email)
+    params.permit(:nickname, :password, :email)
   end
 
-  def response_block(data)
+  def response_handler(data)
     respond_to do |format|
       format.json { render json: data }
       format.html
