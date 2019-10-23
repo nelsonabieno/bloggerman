@@ -1,3 +1,42 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<%= @users.inspect %>
+<h4> Users List</h4>
+<strong>
+  <p class="green-text">
+    <% if flash[:success] %>
+        <%= flash[:success] %>
+    <% end %>
+  </p>
+</strong>
+
+<%=link_to new_user_path, :class =>'btn-floating btn-large waves-effect waves-light right blue material-icons' do %>
+  <i class="material-icons"> person_add </i>
+<%end%>
+
+<table class="striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nickname</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td> <%=user.id %> </td>
+        <td> <%=user.nickname %></td>
+        <td> <%=user.email %> </td>
+        <td>
+          <%= link_to edit_user_path(user.id), :class =>'waves-effect waves-light btn' do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+          <%= link_to user_path(user.id), :class =>'waves-effect waves-light btn red', method: 'delete',
+                      data: {confirm:'Are you sure you want to delete?', disable_with: 'deleting...'} do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

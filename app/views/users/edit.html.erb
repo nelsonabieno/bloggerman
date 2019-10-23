@@ -3,10 +3,20 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title"> Showing User <strong> <%= @user.nickname %> </strong></span>
-        <%= form_for  @user, :url => {:action => :create}, :html => {:class => 'col s6'} do |f| %>
+        <span class="red-text card-text">
+            <% if @error %>
+              <% @error.each do |error| %>
+                 <p> <%= error %> </p>
+              <% end %>
+            <% end %>
+        </span>
+        <%= form_for  @user, :url => {:action => :update}, :html => {:class => 'col s6'} do |f| %>
+            <%= f.label :nickname %>
             <%= f.text_field :nickname, :placeholder => 'Nickname' %>
+            <%= f.label :email %>
             <%= f.text_field :email, :placeholder => 'Email' %>
-            <%= f.text_field :password, :placeholder => 'Password' %>
+            <%= f.label :password %>
+            <%= password_field_tag :password, @user.password %>
             <%= f.submit  :class=>'waves-effect waves-light btn' %>
         <% end %>
       </div>
