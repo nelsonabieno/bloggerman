@@ -15,8 +15,12 @@
             <%= f.text_field :nickname, :placeholder => 'Nickname' %>
             <%= f.label :email %>
             <%= f.text_field :email, :placeholder => 'Email' %>
-            <%= f.label :password %>
-            <%= password_field_tag :password, @user.password %>
+            <%= f.label :current_password %>
+            <%= password_field_tag :current_password %>
+            <%= f.label :new_password %>
+            <%= password_field_tag :new_password %>
+            <%= f.label :password_confirmation %>
+            <%= password_field_tag :password_confirmation %>
             <%= f.submit  :class=>'waves-effect waves-light btn' %>
         <% end %>
       </div>
