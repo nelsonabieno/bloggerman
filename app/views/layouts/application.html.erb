@@ -10,6 +10,13 @@
   </head>
 
   <body>
+  <strong>
+    <p class="green-text">
+      <% if flash[:success] %>
+          <%= flash[:success] %>
+      <% end %>
+    </p>
+  </strong>
     <%= yield %>
   </body>
 </html>
