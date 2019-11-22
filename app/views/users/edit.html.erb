@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"> Showing User <strong> <%= @user.nickname %> </strong></span>
+        <span class="red-text card-text">
+            <% if @error %>
+              <% @error.each do |error| %>
+                 <p> <%= error %> </p>
+              <% end %>
+            <% end %>
+        </span>
+        <%= form_for  @user, :url => {:action => :update}, :html => {:class => 'col s6'} do |f| %>
+            <%= f.label :nickname %>
+            <%= f.text_field :nickname, :placeholder => 'Nickname' %>
+            <%= f.label :email %>
+            <%= f.text_field :email, :placeholder => 'Email' %>
+            <%= f.label :current_password %>
+            <%= password_field_tag :current_password %>
+            <%= f.label :new_password %>
+            <%= password_field_tag :new_password %>
+            <%= f.label :password_confirmation %>
+            <%= password_field_tag :password_confirmation %>
+            <%= f.submit  :class=>'waves-effect waves-light btn' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
