@@ -32,11 +32,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
-#      - run:
-#          name: install dependencies
-#          command: |
-#            gem install bundler -v 2.0.2 && bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run:
           name: Configure Bundler
           command: |
