@@ -11,11 +11,7 @@
 
   <body>
   <strong>
-    <p class="green-text card-text">
-      <% if flash[:success] %>
-          <%= flash[:success] %>
-      <% end %>
-    </p>
+    <%= render 'layouts/alerts' %>
   </strong>
 
   <strong>

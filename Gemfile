@@ -30,6 +30,7 @@ gem 'mysql2', '>= 0.4.4'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'jquery-rails'
+gem 'devise'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
