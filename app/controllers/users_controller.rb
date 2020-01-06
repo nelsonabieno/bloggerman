@@ -92,7 +92,7 @@ class UsersController < ApplicationController
   end
 
   def validate_current_password
-    existing_password = BCrypt::Password.new(@user.password_digest)
+    existing_password = BCrypt::Password.new(@user.encrypted_password)
 
     # existing_password must always be at the left hand side of comparison
     if existing_password == params[:current_password]
