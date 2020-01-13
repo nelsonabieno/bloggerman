@@ -17,6 +17,14 @@
       <% end %>
     </p>
   </strong>
+
+  <strong>
+    <p class="red-text">
+      <% if flash[:error] %>
+          <%= flash[:error].each{|error| error } %>
+      <% end %>
+    </p>
+  </strong>
     <%= yield %>
   </body>
 </html>

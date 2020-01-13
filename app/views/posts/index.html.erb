@@ -1,2 +1,42 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<strong>
+  <p class="red-text center">
+    <% if @user.posts.count == 0 %>
+        No Post Record!
+    <% end %>
+  </p>
+</strong>
+
+<%=link_to new_user_post_path, :class =>'btn-floating btn-large waves-effect waves-light right blue material-icons' do %>
+    <i class="material-icons"> library_add </i>
+<%end%>
+<h3> Showing posts for user <b><%= @user.nickname %></b></h3>
+
+<table class="striped">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user.posts.each do |post| %>
+      <tr>
+        <td> <%= post.id %> </td>
+        <td> <%= post.title %></td>
+        <td> <%= post.body %> </td>
+        <td>
+          <%= link_to edit_user_post_path({ id: post.id, user_id: @user.id }), :class=> 'btn blue' do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+
+          <%= link_to user_post_path({ id: post.id, user_id: @user.id }), :class =>'waves-effect waves-light btn red', :method=> 'delete',
+                      data: {confirm:'Are you sure you want to delete?', disable_with: 'deleting...'} do %>
+                <i class="material-icons">delete</i>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
