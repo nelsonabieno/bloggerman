@@ -38,6 +38,8 @@ class PostsController < ApplicationController
       flash[:success] = 'Post successfully updated'
       redirect_to user_posts_path
     end
+
+    #TODO else block
   end
 
   def destroy

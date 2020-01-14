@@ -3,13 +3,6 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">New Post for User <b><%= @user.nickname %></b></span>
-        <span class="card-title red-text card-text">
-            <% if @error %>
-              <% @error.each do |error| %>
-                 <p> <%= error %> </p>
-              <% end %>
-            <% end %>
-          </span>
         <%= form_for  @post, :url => {:action => :create}, :html => {:class => 'col s6'} do |f| %>
             <%= f.label :title %>
             <%= f.text_field :title, :placeholder => 'Title' %>
