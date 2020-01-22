@@ -11,9 +11,19 @@
 
   <body>
   <strong>
-    <p class="green-text">
+    <p class="green-text card-text">
       <% if flash[:success] %>
           <%= flash[:success] %>
+      <% end %>
+    </p>
+  </strong>
+
+  <strong>
+    <p class="red-text card-text">
+      <% if flash[:error] %>
+          <% flash[:error].each do |error| %>
+              <%= error %>
+          <% end %>
       <% end %>
     </p>
   </strong>

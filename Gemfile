@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'mysql2', '>= 0.4.4'
 gem 'materialize-sass'
 gem 'material_icons'
+gem 'jquery-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

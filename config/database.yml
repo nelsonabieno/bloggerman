@@ -15,7 +15,7 @@ development:
   <<: *default
   database: bloggerman_dev
   host: localhost
-  username: root
+  username: rotimiifedayonelson
   password: ''
 
 # Warning: The database defined as "test" will be erased and
