@@ -26,6 +26,10 @@
         <td> <%= comment.id %> </td>
         <td> <%= comment.body %> </td>
         <td>
+          <%= link_to user_post_comment_path({ id: comment.id, post_id: @post.id,user_id: @user.id }), :class=> 'btn blue' do %>
+              <i class="material-icons">lens</i>
+          <% end %>
+
           <%= link_to edit_user_post_comment_path({ id: comment.id, post_id: @post.id,user_id: @user.id }), :class=> 'btn blue' do %>
               <i class="material-icons">edit</i>
           <% end %>

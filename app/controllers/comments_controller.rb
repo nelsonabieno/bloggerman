@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
-  before_action :find_user,:find_post, only: [:new, :index, :edit]
+  before_action :find_user,:find_post, only: [:new, :index, :edit, :show, :update]
   before_action :find_post, only: [:new, :index, :create, :edit]
-  before_action :find_post_comment, only: [:update,:destroy]
+  before_action :find_post_comment, only: [:update,:destroy, :show]
 
   def index
-    # binding.pry
     @comments = @user.posts.find(params[:post_id]).comments
-    # find_post_comments
+    response_handler @comments
   end
 
   def show
+    response_handler @post_comment
   end
 
   def new
@@ -19,21 +19,24 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
-    # @comment.user_id = params[:user_id]
+    @comment.user_id = params[:user_id]
 
     if @comment.save
       flash[:success] = 'Comment successfully created'
-      # binding.pry
-      redirect_to user_post_comments_path
+      respond_to do |format|
+        format.html { redirect_to user_post_comments_path }
+        format.json  { render json: @comment, status: :created }
+      end
     else
-      # binding.pry
       flash[:error] = @comment.errors.full_messages
-      render 'new'
+      respond_to do |format|
+        format.json { render json: flash[:error]  }
+        format.html { render 'new' }
+      end
     end
   end
 
   def edit
-    # binding.pry
     @comment = @post.comments.find(params[:id])
 
     if @comment.nil?
@@ -43,16 +46,32 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment = @post.comments.find(params[:id])
+
     if @post_comment.update(comment_params)
       flash[:success] = 'Comment successfully updated'
-      redirect_to user_post_comments_path
+      respond_to do |format|
+        format.html { redirect_to user_post_comments_path }
+        format.json  { render json: @post_comment, status: :created }
+      end
+    else
+      flash[:error] = @post_comment.errors.full_messages
+      respond_to do |format|
+        format.json { render json: { error: flash[:error] }  }
+        format.html { render 'edit' }
+      end
     end
   end
 
   def destroy
     if @post_comment.destroy
       flash[:success] = 'Comment successfully deleted'
-      redirect_to user_post_comments_path
+
+      respond_to do |format|
+        format.html { redirect_to user_post_comments_path }
+        format.json  { render json: @post_comment, status: :ok }
+      end
+
     end
   end
 
@@ -81,5 +100,12 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:user_id, :post_id, :body)
+  end
+
+  def response_handler data
+    respond_to do |format|
+      format.json { render json: data  }
+      format.html
+    end
   end
 end
