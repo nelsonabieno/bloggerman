@@ -85,6 +85,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
+    dotenv (2.7.5)
+    dotenv-rails (2.7.5)
+      dotenv (= 2.7.5)
+      railties (>= 3.2, < 6.1)
     erubi (1.9.0)
     execjs (2.7.0)
     factory_bot (5.1.1)
@@ -126,7 +130,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-    msgpack (1.3.1)
+    msgpack (1.3.2)
     mysql2 (0.5.3)
     nio4r (2.5.2)
     nokogiri (1.10.7)
@@ -253,6 +257,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner
   devise
+  dotenv-rails
   factory_bot_rails
   faker
   jbuilder (~> 2.5)
