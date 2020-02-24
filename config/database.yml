@@ -15,8 +15,8 @@ development:
   <<: *default
   database: bloggerman_dev
   host: localhost
-  username: root
-  password: ''
+  username:  <%= ENV['DEV_DB_USERNAME'] %>
+  password:  <%= ENV['DEV_DB_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,4 +28,7 @@ test:
 
 production:
   <<: *default
-  database: bloggerman_prod
+  database: <%= ENV['PROD_DB'] %>
+  host: <%= ENV['PROD_DB_HOST'] %>
+  username: <%= ENV['PROD_DB_USERNAME'] %>
+  password: <%= ENV['PROD_DB_PASSWORD'] %>

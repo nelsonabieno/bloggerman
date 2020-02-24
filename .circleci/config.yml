@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.3.7-node-browsers
+      - image: circleci/ruby:2.7.0-node-browsers
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
@@ -37,7 +37,7 @@ jobs:
           command: |
             echo 'export  BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
-            gem install bundler
+            gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
             bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: |-
           mkdir -p config && echo 'test:
